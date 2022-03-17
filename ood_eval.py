@@ -41,6 +41,8 @@ def main():
                         help="Total batch size for eval.")
     parser.add_argument('--seed', type=int, default=42,
                         help="random seed for initialization")
+    parser.add_argument("--local_rank", type=int, default=-1,
+                        help="local_rank for distributed training on gpus")
     
     
     args = parser.parse_args()
@@ -50,5 +52,5 @@ def main():
     c.test(args)
 
 if __name__=='__main__':
-    app.run(main)
+    main()
     
