@@ -75,6 +75,36 @@ def get_measures(_pos, _neg, recall_level=recall_level_default):
 
     return auroc, aupr, fpr, threshould
 
+def fpr95(id_score, ood_score):
+
+    Y1 = ood_score
+    X1 = id_score
+  
+    start = np.min([np.min(X1), np.min(Y1)])
+    end = np.max([np.max(X1), np.max(Y1)])
+    gap = (end- start)/100000
+   
+    total = 0.0
+    fpr = 0.0
+    
+    for delta in np.arange(start, end, gap):
+            tpr = np.sum(np.sum(X1 > delta)) / np.float(len(X1))
+            error2 = np.sum(np.sum(Y1 <= delta)) / np.float(len(Y1))
+            if  tpr <=0.9505 and tpr >= 0.9495:
+                fpr += error2
+                total += 1
+    fprNew = fpr/total
+    return fprNew
+
+def auroc(id_score, ood_score):
+    from sklearn import metrics 
+    Y1 = ood_score
+    X1 = id_score
+    pred = np.concatenate((X1,Y1))
+    label = np.concatenate((np.ones((len(X1))),np.zeros((len(Y1)))))
+    auc = metrics.roc_auc_score(label, pred)
+    return  auc
+ 
 
 def print_measures(auroc, aupr, fpr,recall_level=recall_level_default):
    

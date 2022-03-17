@@ -15,7 +15,7 @@ class ConsistencyDataset(Dataset):
     def __init__(self, transform, root_dir):
         self.envs = ['land','water']
         self.root_dir  = root_dir
-        self.dataset_name = [f'waterbird_{env}' for env in self.envs]
+        self.dataset_name = [f'{env}_bg' for env in self.envs]
         self.dataset_dir = [os.path.join(self.root_dir, dataset_name,'images') for dataset_name in self.dataset_name]
         if not os.path.exists(self.dataset_dir[0]):
             raise ValueError(

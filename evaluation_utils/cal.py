@@ -34,7 +34,7 @@ def test(args):
                     model_dict[args.model_type],
                     pretrained=False,
                     num_classes=2,
-                    img_size = 384
+                    img_size = args.img_size
                 )
             model.load_state_dict(torch.load(args.checkpoint_dir + ".bin"))
             model.eval()

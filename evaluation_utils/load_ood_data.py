@@ -54,25 +54,25 @@ def get_ood_loader(args):
         transforms.Normalize(mean, std),
     ])
 
-    if args.dataset == "celebA":
+    if args.id_dataset == "celebA":
         idtestset = get_celebA_dataset(split = "test", transform = transform_test, 
                                 root_dir = 'datasets')
         oodtestset = get_celebA_ood_dataset(transform = transform_test, 
                                root_dir = 'datasets')
     
-    if args.dataset == "waterbirds":
+    if args.id_dataset == "waterbirds":
         idtestset = get_waterbird_dataset(data_label_correlation = 0.95, 
                         split="test", transform = transform_test, root_dir = 'datasets')
 
         oodtestset = torchvision.datasets.ImageFolder("datasets/ood_data/placesbg", transform=transform_test)
     
-    if args.dataset == "cmnist":
+    if args.id_dataset == "cmnist":
     
         idtestset = get_biased_mnist_dataset(root = './datasets/MNIST', 
                                         data_label_correlation= 0.45,
                                         n_confusing_labels= 1,
                                         train=False, partial=True, cmap = "1",transform = transform_test)
-        oodtestset = torchvision.datasets.ImageFolder("datasets/ood_data/cmnist", transform=transform_test)
+        oodtestset = torchvision.datasets.ImageFolder("datasets/ood_data/partial_color_mnist_0&1", transform=transform_test)
 
 
     testloaderIn = torch.utils.data.DataLoader(idtestset, batch_size=args.batch_size,
