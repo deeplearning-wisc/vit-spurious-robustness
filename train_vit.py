@@ -13,7 +13,7 @@ import torch.distributed as dist
 from tqdm import tqdm
 from torch.utils.tensorboard import SummaryWriter
 from utils.scheduler import WarmupCosineSchedule
-from utils.data_utils import get_loader
+from utils.data_utils import get_loader_train
 from utils.dist_util import get_world_size
 import timm
 from apex.parallel import DistributedDataParallel as DDP
@@ -118,7 +118,7 @@ def train_model(args):
     if args.local_rank in [-1, 0]:
         writer = SummaryWriter(log_dir=log_dir)
     args.train_batch_size = args.train_batch_size // args.batch_split
-    train_loader, test_loader = get_loader(args)
+    train_loader, test_loader = get_loader_train(args)
     cri = torch.nn.CrossEntropyLoss().to(args.device)
     # Prepare optimizer and scheduler
     optimizer = torch.optim.SGD(model.parameters(),

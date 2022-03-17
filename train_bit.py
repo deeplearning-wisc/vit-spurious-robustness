@@ -10,7 +10,7 @@ import models.bits as models
 import utils.bit_common as bit_common
 import utils.bit_hyperrule as bit_hyperrule
 from itertools import cycle
-from utils.data_utils import get_loader
+from utils.data_utils import get_loader_train
 
 
 def accuracy(out, label):
@@ -66,7 +66,7 @@ def train_model(args):
   torch.backends.cudnn.benchmark = True
   logger.info(f"Going to train on {args.device}")
   args.train_batch_size = args.train_batch_size // args.batch_split
-  train_loader, valid_loader = get_loader(args)
+  train_loader, valid_loader = get_loader_train(args)
 
   logger.info(f"Loading model from {args.model_type}.npz")
   model = models.KNOWN_MODELS[args.model_type](head_size=2, zero_head=True)
