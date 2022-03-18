@@ -68,7 +68,7 @@ Notes for some of the arguments:
 
 * `--checkpoint_dir` : Model checkpoint fine-tuned on waterbirds to be used for inference. If not provided, then it automatically searches for the model checkpoint in `output/[name]/[model_arch]/[model_type]` directory.
 
-To generate consistency measure, users need to first download the evaluation dataset from [here]() and place the images in `[root_dir]/datasets/waterbird_bg` directory. For ViT model (ViT-S_16), run the following command: 
+To generate consistency measure, users need to first download the evaluation dataset from [here](https://www.dropbox.com/s/eq32ww5bmailgaj/waterbird_bg.zip?dl=0) and place the images in `[root_dir]/datasets/waterbird_bg` directory. For ViT model (ViT-S_16), run the following command: 
 
 ```
 python waterbirds_consistency.py --name waterbirds_exp --model_arch ViT --model_type ViT-S_16 --checkpoint_dir model_checkpoint --batch_size 32
