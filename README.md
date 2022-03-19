@@ -138,3 +138,15 @@ python ood_eval.py --name celeba_exp --model_arch ViT --model_type ViT-S_16 --id
 ## References
 Some parts of the codebase are adapted from [GDRO](https://github.com/kohpangwei/group_DRO), [Spurious_OOD](https://github.com/deeplearning-wisc/Spurious_OOD), [big_transfer](https://github.com/google-research/big_transfer) and [ViT-pytorch](https://github.com/jeonsworld/ViT-pytorch).
 
+## For bibtex citation 
+
+```
+@misc{ghosal2022vision,
+      title={Are Vision Transformers Robust to Spurious Correlations?}, 
+      author={Soumya Suvra Ghosal and Yifei Ming and Yixuan Li},
+      year={2022},
+      eprint={2203.09125},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+```
