@@ -70,7 +70,7 @@ def get_loader_train(args):
     if args.dataset == "celebA":
         trainset = get_celebA_dataset(split = "train", transform = transform_train, 
                                 root_dir = 'datasets')
-        testset = get_celebA_dataset(split = "test", transform = transform_test, 
+        testset = get_celebA_dataset(split = "val", transform = transform_test, 
                                root_dir = 'datasets')
     
     if args.dataset == "waterbirds":
@@ -78,7 +78,7 @@ def get_loader_train(args):
                         split="train", transform = transform_test, root_dir = 'datasets')
 
         testset = get_waterbird_dataset(data_label_correlation = 0.95, 
-                        split="test", transform = transform_test,root_dir = 'datasets')
+                        split="val", transform = transform_test,root_dir = 'datasets')
     
     if args.dataset == "cmnist":
         trainset_1 = get_biased_mnist_dataset(root = './datasets/MNIST',
