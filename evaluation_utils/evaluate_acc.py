@@ -26,39 +26,42 @@ model_dict = {'ViT-B_16':'vit_base_patch16_224_in21k',
 
 class Result:
 
-        def __init__(self):
-            self.acc = defaultdict(list)
-            self.counter_env = Counter()
-            self.counter_label = Counter()
+    def __init__(self):
+        self.acc = defaultdict(list)
+        self.counter_env = Counter()
+        self.counter_label = Counter()
         
-        def update(self, out, env, label):
-            self.counter_env.update(env)
-            self.counter_label.update(label)
-            self.accuracy_per_env( out, env, label)
+    
+    def update(self, out, env, label):
+        self.counter_env.update(env)
+        self.counter_label.update(label)
+        self.accuracy_per_env( out, env, label)
 
-        def accuracy_per_env(self, out, env, label):
-            for env_unique in np.unique(env):
-                ind = env==env_unique
-                acc_env = accuracy(out[ind], label[ind])
-                self.acc[env_unique].append(acc_env)
+    def accuracy_per_env(self, out, env, label):
+        for env_unique in np.unique(env):
+            ind = env==env_unique
+            pred= np.argmax(out[ind],axis=1)
+            correct = sum(pred == label[ind])
+            self.acc[env_unique].append(correct)
 
-        def output_result(self):
-            print("The number of examples according to environment :")
-            for key, val in self.counter_env.items():
-                print(f"{key} : {val}", end = '  ')
-            
-            print("\n **************** ")
-            print("The number of examples according to labels :")
-            for key, val in self.counter_label.items():
-                print(f"{key} : {val}", end = '  ')
+    def output_result(self):
+        print("The number of examples according to environment :")
+        for key, val in self.counter_env.items():
+            print(f"{key} : {val}", end = '  ')
+        
+        print("\n **************** ")
+        print("The number of examples according to labels :")
+        for key, val in self.counter_label.items():
+            print(f"{key} : {val}", end = '  ')
 
-            print("\n **************** ")
-            print("\nThe accuracy according to environemnt :")
-            for key, val in self.acc.items():
-                acc = sum(val)/len(val)
-                print(f"{key} : {acc}", end = '  ')
-            
-            print("\n")
+        print("\n **************** ")
+        print("\nThe accuracy according to environemnt :")
+        for key, val in self.acc.items():
+            tot_correct = sum(val)
+            acc = tot_correct/self.counter_env[key]
+            print(f"{key} : {acc}", end = '  ')
+        
+        print("\n")
 
 def accuracy(out, label):
                 pred= np.argmax(out,axis=1); 
