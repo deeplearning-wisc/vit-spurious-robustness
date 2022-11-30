@@ -75,7 +75,7 @@ def get_loader_train(args):
     
     if args.dataset == "waterbirds":
         trainset = get_waterbird_dataset(data_label_correlation = 0.95, 
-                        split="train", transform = transform_test, root_dir = 'datasets')
+                        split="train", transform = transform_train, root_dir = 'datasets')
 
         testset = get_waterbird_dataset(data_label_correlation = 0.95, 
                         split="val", transform = transform_test,root_dir = 'datasets')
