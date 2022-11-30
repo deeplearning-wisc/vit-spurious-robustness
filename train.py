@@ -53,7 +53,7 @@ def main():
 
     parser.add_argument("--local_rank", type=int, default=-1,
                         help="local_rank for distributed training on gpus")
-    parser.add_argument('--seed', type=int, default=42,
+    parser.add_argument('--seed', type=int, default=0,
                         help="random seed for initialization")
     parser.add_argument('--batch_split', type=int, default=16,
                         help="Number of updates steps to accumulate before performing a backward/update pass.")
