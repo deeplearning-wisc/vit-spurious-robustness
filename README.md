@@ -35,9 +35,9 @@ The code expects the following files/folders in the `[root_dir]/datasets` direct
 
 You can download a tarball of this dataset from [here](https://nlp.stanford.edu/data/dro/waterbird_complete95_forest2water2.tar.gz). The Waterbirds dataset can also be accessed through the [WILDS package](https://github.com/p-lambda/wilds), which will automatically download the dataset.
 
-To train ViT model (ViT-S_16) on Waterbirds dataset, run the following command:
+To train ViT model (ViT-B_16) on Waterbirds dataset, run the following command:
 ```
-python train.py --name waterbirds_exp --model_arch ViT --model_type ViT-S_16 --dataset waterbirds --warmup_steps 500 --num_steps 1000 --learning_rate 0.03 --batch_split 1 --img_size 384
+python train.py --name waterbirds_exp --model_arch ViT --model_type ViT-B_16 --dataset waterbirds --warmup_steps 500 --num_steps 700 --learning_rate 0.03 --batch_split 1 --img_size 384
 ```
 Similarly, sample command to run BiT model on Watervirds dataset:
 ```
@@ -82,58 +82,6 @@ To obtain spurious OOD evaluation for for ViT model (ViT-S_16), run the followin
 python ood_eval.py --name waterbirds_exp --model_arch ViT --model_type ViT-S_16 --id_dataset waterbirds --batch_size 64 --img_size 384 --checkpoint_dir model_checkpoint
 ```
 
-### ColorMNIST
-* `datasets/color_mnist.py` downloads the original MNIST and applies colour biases on images by itself. No extra preparation is needed on the user side.
-
-Here is an example to train ViT model (ViT-S_16) on the ColorMNIST Dataset:
-
-```
-python train.py --name cmnist_exp --model_arch ViT --model_type ViT-S_16 --dataset cmnist --warmup_steps 500 --num_steps 1000 --learning_rate 0.03 --batch_split 1 --img_size 224
-```
-
-To generate accuracy metrics for ViT model(ViT-S_16) on train and test data (worst-group accuracy), run the following command :
-
-```
-python evaluate.py --name cmnist_exp --model_arch ViT --model_type ViT-S_16 --dataset cmnist --batch_size 64 --img_size 224 --checkpoint_dir model_checkpoint
-```
-
-For measuring consistency metrics for ViT model(ViT-S_16) on BW setup, run the following command :
-
-```
-python cmnist_consistency.py --name cmnist_exp --model_type ViT-S_16 --model_arch ViT --setup BW --random_runs 50 --batch_size 32  --checkpoint_dir model_checkpoint
-```
-Notes for some of the arguments:
-
-* `--setup` : Represents the setup to be used for measuring consistency. Available choices are "BW" and "Random".
-
-
-
-#### Spurious OOD evaluation
-Spurious OOD data for CMNIST can be downloaded [here](https://www.dropbox.com/s/kqqm9doda33f4tt/partial_color_mnist_0%261.zip?dl=0) and place it under `datasets/ood_data`.
-
-To obtain spurious OOD evaluation for for ViT model(ViT-S_16), run the following command:
-```
-python ood_eval.py --name cmnist_exp --model_arch ViT --model_type ViT-S_16 --id_dataset cmnist --batch_size 64 --img_size 224 --checkpoint_dir model_checkpoint
-```
-
-### CelebA
-* `datasets/celebA_dataset.py`: provides the dataloader for CelebA datasets and OOD datasets.
-
-Here is an example to train ViT model (ViT-S_16) on the ColorMNIST Dataset:
-
-```
-python train.py --name celeba_exp --model_arch ViT --model_type ViT-S_16 --dataset celebA --warmup_steps 500 --num_steps 1000 --learning_rate 0.03 --batch_split 1 --img_size 384
-```
-To generate accuracy metrics for ViT model(ViT-S_16) on train and test data (worst-group accuracy), run the following command :
-```
-python evaluate.py --name celeba_exp --model_arch ViT --model_type ViT-S_16 --dataset celebA --batch_size 64 --img_size 384 --checkpoint_dir model_checkpoint
-```
-#### Spurious OOD evaluation
-The meta data for this dataset has already been included in the provided CelebA zip file as `datasets/CelebA/celebA_ood.csv`.
-To obtain spurious OOD evaluation for for ViT model(ViT-S_16), run the following command:
-```
-python ood_eval.py --name celeba_exp --model_arch ViT --model_type ViT-S_16 --id_dataset celebA --batch_size 64 --img_size 384 --checkpoint_dir model_checkpoint
-```
 
 ## References
 Some parts of the codebase are adapted from [GDRO](https://github.com/kohpangwei/group_DRO), [Spurious_OOD](https://github.com/deeplearning-wisc/Spurious_OOD), [big_transfer](https://github.com/google-research/big_transfer) and [ViT-pytorch](https://github.com/jeonsworld/ViT-pytorch).
