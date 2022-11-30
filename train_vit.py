@@ -177,9 +177,9 @@ def train_model(args):
                     writer.add_scalar("train/lr", scalar_value=scheduler.get_lr()[0], global_step=global_step)
                 if global_step % args.eval_every == 0 and args.local_rank in [-1, 0]:
                     accuracy = valid(args, model, writer, test_loader, global_step)
-                    if best_acc < accuracy:
-                        save_model(args, model)
-                        best_acc = accuracy
+#                     if best_acc < accuracy:
+#                         save_model(args, model)
+#                         best_acc = accuracy
                     model.train()
 
                 if global_step % t_total == 0:
@@ -187,7 +187,7 @@ def train_model(args):
         losses.reset()
         if global_step % t_total == 0:
             break
-
+    save_model(args, model)
     if args.local_rank in [-1, 0]:
         writer.close()
     logger.info("Best Accuracy: \t%f" % best_acc)
