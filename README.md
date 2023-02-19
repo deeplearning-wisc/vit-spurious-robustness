@@ -21,7 +21,7 @@ In our experiments, for ViT models we use the pre-trained checkpoints provided w
 
 In our study, we use the following challenging benchmarks :
   - WaterBirds:  Similar to the construction in [Group_DRO](https://github.com/kohpangwei/group_DRO), this dataset is constructed by cropping out birds from photos in the Caltech-UCSD Birds-200-2011 (CUB) dataset (Wah et al., 2011) and transferring them onto backgrounds from the Places dataset (Zhou et al., 2017).
-  - [CelebA](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html): Large-scale CelebFaces Attributes Dataset. The data we used for this task is listed in `datasets/celebA/celebA_split.csv`, and after downloading the dataset, please place the images in the folder of `datasets/celebA/img_align_celeba/`. 
+  - [CelebA](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html): Large-scale CelebFaces Attributes Dataset. The data we used for this task is listed in `datasets/celebA/celebA_split.csv`, and after downloading the dataset, please place the images in the folder of `datasets/celebA/img_align_celeba/`. `datasets/celebA_dataset.py` provides the dataloader for CelebA datasets and OOD datasets.
   - ColorMINST:  A colour-biased version of the original [MNIST](http://yann.lecun.com/exdb/mnist/) Dataset. 
 
 ## Quick Start
